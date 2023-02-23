@@ -1,0 +1,36 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Part 1
+
+```{r}
+# Random weight matrix between 160 and 200 pounds
+weights <- matrix(runif(25, min = 160, max = 200), nrow = 5, ncol = 5)
+
+# Months from January to May as col names
+colnames(weights) <- c("January", "February", "March", "April", "May")
+
+# 5 names of people as row names
+rownames(weights) <- c("Ana", "Jhon", "Charlie", "Diana", "Helen")
+
+# Show start matrix
+weights
+
+# Avarage weight by person
+avarage_weight_by_person <- rowMeans(weights)
+avarage_weight_by_person
+
+# Avarage weight by month
+avarage_weight_by_month <- colMeans(weights)
+avarage_weight_by_month
+
+# Matix with averages
+weights_with_averages <- cbind(weights, avarage_weight_by_person)
+weights_with_averages <- rbind(weights_with_averages, avarage_weight_by_month)
+rownames(weights_with_averages)[nrow(weights_with_averages)] <- "Average"
+colnames(weights_with_averages)[ncol(weights_with_averages)] <- "Average"
+weights_with_averages
+
+```
