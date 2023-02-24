@@ -1,2 +1,6 @@
 # Mac local files
 .DS_Store
+
+# R Studio files
+.RData
+.Rhistory
