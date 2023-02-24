@@ -1755,67 +1755,68 @@ display: none;
 <p>Part 1</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDb25zdHJ1aXIgbWF0cml6IGRlIHBlc29zIGFsZWF0b3Jpb3NcbnNldC5zZWVkKDEyMykgIyBwYXJhIHJlcGxpY2FiaWxpZGFkXG5wZXNvcyA8LSBtYXRyaXgocnVuaWYoMjUsIG1pbiA9IDE2MCwgbWF4ID0gMjAwKSwgbnJvdyA9IDUsIG5jb2wgPSA1KVxucm93bmFtZXMocGVzb3MpIDwtIGMoXCJBbmFcIiwgXCJCZXRvXCIsIFwiQ2FybG9zXCIsIFwiRGlhbmFcIiwgXCJFbGVuYVwiKVxuY29sbmFtZXMocGVzb3MpIDwtIGMoXCJlbmVyb1wiLCBcImZlYnJlcm9cIiwgXCJtYXJ6b1wiLCBcImFicmlsXCIsIFwibWF5b1wiKVxucGVzb3NcbmBgYCJ9 -->
-<pre class="r"><code># Construir matriz de pesos aleatorios
-set.seed(123) # para replicabilidad
-pesos &lt;- matrix(runif(25, min = 160, max = 200), nrow = 5, ncol = 5)
-rownames(pesos) &lt;- c(&quot;Ana&quot;, &quot;Beto&quot;, &quot;Carlos&quot;, &quot;Diana&quot;, &quot;Elena&quot;)
-colnames(pesos) &lt;- c(&quot;enero&quot;, &quot;febrero&quot;, &quot;marzo&quot;, &quot;abril&quot;, &quot;mayo&quot;)
-pesos</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBSYW5kb20gd2VpZ2h0IG1hdHJpeCBiZXR3ZWVuIDE2MCBhbmQgMjAwIHBvdW5kc1xud2VpZ2h0cyA8LSBtYXRyaXgocnVuaWYoMjUsIG1pbiA9IDE2MCwgbWF4ID0gMjAwKSwgbnJvdyA9IDUsIG5jb2wgPSA1KVxuXG4jIE1vbnRocyBmcm9tIEphbnVhcnkgdG8gTWF5IGFzIGNvbCBuYW1lc1xuY29sbmFtZXMod2VpZ2h0cykgPC0gYyhcIkphbnVhcnlcIiwgXCJGZWJydWFyeVwiLCBcIk1hcmNoXCIsIFwiQXByaWxcIiwgXCJNYXlcIilcblxuIyA1IG5hbWVzIG9mIHBlb3BsZSBhcyByb3cgbmFtZXNcbnJvd25hbWVzKHdlaWdodHMpIDwtIGMoXCJBbmFcIiwgXCJKaG9uXCIsIFwiQ2hhcmxpZVwiLCBcIkRpYW5hXCIsIFwiSGVsZW5cIilcblxuIyBTaG93IHN0YXJ0IG1hdHJpeFxud2VpZ2h0c1xuYGBgIn0= -->
+<pre class="r"><code># Random weight matrix between 160 and 200 pounds
+weights &lt;- matrix(runif(25, min = 160, max = 200), nrow = 5, ncol = 5)
+
+# Months from January to May as col names
+colnames(weights) &lt;- c(&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;)
+
+# 5 names of people as row names
+rownames(weights) &lt;- c(&quot;Ana&quot;, &quot;Jhon&quot;, &quot;Charlie&quot;, &quot;Diana&quot;, &quot;Helen&quot;)
+
+# Show start matrix
+weights</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgIGVuZXJvICBmZWJyZXJvICAgIG1hcnpvICAgIGFicmlsICAgICBtYXlvXG5BbmEgICAgMTcxLjUwMzEgMTYxLjgyMjMgMTk4LjI3MzMgMTk1Ljk5MzAgMTk1LjU4MTZcbkJldG8gICAxOTEuNTMyMiAxODEuMTI0MiAxNzguMTMzNCAxNjkuODQzNSAxODcuNzEyMVxuQ2FybG9zIDE3Ni4zNTkxIDE5NS42OTY4IDE4Ny4xMDI4IDE2MS42ODI0IDE4NS42MjAzXG5EaWFuYSAgMTk1LjMyMDcgMTgyLjA1NzQgMTgyLjkwNTMgMTczLjExNjggMTk5Ljc3MDhcbkVsZW5hICAxOTcuNjE4NyAxNzguMjY0NiAxNjQuMTE3MCAxOTguMTgwMSAxODYuMjI4MlxuIn0= -->
-<pre><code>          enero  febrero    marzo    abril     mayo
-Ana    171.5031 161.8223 198.2733 195.9930 195.5816
-Beto   191.5322 181.1242 178.1334 169.8435 187.7121
-Carlos 176.3591 195.6968 187.1028 161.6824 185.6203
-Diana  195.3207 182.0574 182.9053 173.1168 199.7708
-Elena  197.6187 178.2646 164.1170 198.1801 186.2282</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgSmFudWFyeSBGZWJydWFyeSAgICBNYXJjaCAgICBBcHJpbCAgICAgIE1heVxuQW5hICAgICAxNjUuODI3MyAxNzguMTk0OCAxNjUuODUxMCAxNjcuMjkxOSAxNjMuMTQ0NlxuSmhvbiAgICAxODYuMjYxNiAxNzguNzczMyAxNjEuNzEzNyAxNzcuNjU1NCAxOTUuODk2OFxuQ2hhcmxpZSAxNzIuNjc5NCAxODkuNTIzMSAxODMuMjU4OSAxNjYuODc4NyAxOTYuMjcyMFxuRGlhbmEgICAxNjkuMDA4OSAxNjUuMzkxNCAxODAuNzczNCAxODguMjc1MCAxNjYuMzY1MVxuSGVsZW4gICAxNjMuMzEyOSAxNzguMTExOSAxNjguMjcwNyAxOTUuMjYxNSAxNzUuOTgyNVxuIn0= -->
+<pre><code>         January February    March    April      May
+Ana     165.8273 178.1948 165.8510 167.2919 163.1446
+Jhon    186.2616 178.7733 161.7137 177.6554 195.8968
+Charlie 172.6794 189.5231 183.2589 166.8787 196.2720
+Diana   169.0089 165.3914 180.7734 188.2750 166.3651
+Helen   163.3129 178.1119 168.2707 195.2615 175.9825</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjdWxhciBlbCBwZXNvIHByb21lZGlvIGRlIGNhZGEgcGVyc29uYSBkdXJhbnRlIGxvcyBtZXNlcyBkZSBlbmVybyBhIG1heW9cbnBlc29fcHJvbWVkaW9fcGVyc29uYSA8LSBhcHBseShwZXNvcywgMSwgbWVhbilcbnBlc29fcHJvbWVkaW9fcGVyc29uYVxuYGBgIn0= -->
-<pre class="r"><code># Calcular el peso promedio de cada persona durante los meses de enero a mayo
-peso_promedio_persona &lt;- apply(pesos, 1, mean)
-peso_promedio_persona</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBdmVyYWdlIHdlaWdodCBieSBwZXJzb25cbmF2YXJhZ2Vfd2VpZ2h0X2J5X3BlcnNvbiA8LSByb3dNZWFucyh3ZWlnaHRzKVxuYXZhcmFnZV93ZWlnaHRfYnlfcGVyc29uXG5gYGAifQ== -->
+<pre class="r"><code># Average weight by person
+avarage_weight_by_person &lt;- rowMeans(weights)
+avarage_weight_by_person</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICBBbmEgICAgIEJldG8gICBDYXJsb3MgICAgRGlhbmEgICAgRWxlbmEgXG4xODQuNjM0NyAxODEuNjY5MSAxODEuMjkyMyAxODYuNjM0MiAxODQuODgxNyBcbiJ9 -->
-<pre><code>     Ana     Beto   Carlos    Diana    Elena 
-184.6347 181.6691 181.2923 186.6342 184.8817 </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBBbmEgICAgIEpob24gIENoYXJsaWUgICAgRGlhbmEgICAgSGVsZW4gXG4xNjguMDYxOSAxODAuMDYwMiAxODEuNzIyNCAxNzMuOTYyNyAxNzYuMTg3OSBcbiJ9 -->
+<pre><code>     Ana     Jhon  Charlie    Diana    Helen 
+168.0619 180.0602 181.7224 173.9627 176.1879 </code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjdWxhciBlbCBwZXNvIHByb21lZGlvIGVuIGNhZGEgbWVzIHBhcmEgdG9kYXMgbGFzIHBlcnNvbmFzXG5wZXNvX3Byb21lZGlvX21lcyA8LSBhcHBseShwZXNvcywgMiwgbWVhbilcbnBlc29fcHJvbWVkaW9fbWVzXG5gYGAifQ== -->
-<pre class="r"><code># Calcular el peso promedio en cada mes para todas las personas
-peso_promedio_mes &lt;- apply(pesos, 2, mean)
-peso_promedio_mes</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNYXRyaXggd2l0aCB3ZWlnaHRzIGF2ZXJhZ2VzXG53ZWlnaHRzX3dpdGhfYXZlcmFnZXMgPC0gY2JpbmQod2VpZ2h0cywgYXZhcmFnZV93ZWlnaHRfYnlfcGVyc29uKVxuXG4jIEF2ZXJhZ2Ugd2VpZ2h0IGJ5IG1vbnRoXG5hdmFyYWdlX3dlaWdodF9ieV9tb250aCA8LSBjb2xNZWFucyh3ZWlnaHRzX3dpdGhfYXZlcmFnZXMpXG5hdmFyYWdlX3dlaWdodF9ieV9tb250aFxuYGBgIn0= -->
+<pre class="r"><code># Matrix with weights averages
+weights_with_averages &lt;- cbind(weights, avarage_weight_by_person)
+
+# Average weight by month
+avarage_weight_by_month &lt;- colMeans(weights_with_averages)
+avarage_weight_by_month</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgZW5lcm8gIGZlYnJlcm8gICAgbWFyem8gICAgYWJyaWwgICAgIG1heW8gXG4xODYuNDY2OCAxNzkuNzkzMCAxODIuMTA2NCAxNzkuNzYzMiAxOTAuOTgyNiBcbiJ9 -->
-<pre><code>   enero  febrero    marzo    abril     mayo 
-186.4668 179.7930 182.1064 179.7632 190.9826 </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgICBKYW51YXJ5ICAgICAgICAgICAgICAgICBGZWJydWFyeSAgICAgICAgICAgICAgICAgICAgTWFyY2ggICAgICAgICAgICAgICAgICAgIEFwcmlsICAgICAgICAgICAgICAgICAgICAgIE1heSBcbiAgICAgICAgICAgICAgICAxNzEuNDE4MCAgICAgICAgICAgICAgICAgMTc3Ljk5ODkgICAgICAgICAgICAgICAgIDE3MS45NzM1ICAgICAgICAgICAgICAgICAxNzkuMDcyNSAgICAgICAgICAgICAgICAgMTc5LjUzMjIgXG5hdmFyYWdlX3dlaWdodF9ieV9wZXJzb24gXG4gICAgICAgICAgICAgICAgMTc1Ljk5OTAgXG4ifQ== -->
+<pre><code>                 January                 February                    March                    April                      May 
+                171.4180                 177.9989                 171.9735                 179.0725                 179.5322 
+avarage_weight_by_person 
+                175.9990 </code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBZ3JlZ2FyIGxhIGZpbGEgeSBjb2x1bW5hIHByb21lZGlvIGEgbGEgbWF0cml6XG5wcm9tZWRpb19tZXNlcyA8LSByZXAobWVhbihwZXNvX3Byb21lZGlvX21lcyksIG5jb2wocGVzb3MpKVxucHJvbWVkaW9fcGVyc29uYXMgPC0gYyhtZWFuKHBlc29fcHJvbWVkaW9fcGVyc29uYSksIHJlcChOQSwgbmNvbChwZXNvcykgLSAxKSlcbnBlc29zX2Nvbl9wcm9tZWRpb3MgPC0gcmJpbmQocGVzb3MsIHByb21lZGlvX3BlcnNvbmFzKVxucGVzb3NfY29uX3Byb21lZGlvcyA8LSBjYmluZChwZXNvc19jb25fcHJvbWVkaW9zLCBwcm9tZWRpb19tZXNlcylcbmBgYCJ9 -->
-<pre class="r"><code># Agregar la fila y columna promedio a la matriz
-promedio_meses &lt;- rep(mean(peso_promedio_mes), ncol(pesos))
-promedio_personas &lt;- c(mean(peso_promedio_persona), rep(NA, ncol(pesos) - 1))
-pesos_con_promedios &lt;- rbind(pesos, promedio_personas)
-pesos_con_promedios &lt;- cbind(pesos_con_promedios, promedio_meses)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VpZ2h0c193aXRoX2F2ZXJhZ2VzIDwtIHJiaW5kKHdlaWdodHNfd2l0aF9hdmVyYWdlcywgYXZhcmFnZV93ZWlnaHRfYnlfbW9udGgpXG5yb3duYW1lcyh3ZWlnaHRzX3dpdGhfYXZlcmFnZXMpW25yb3cod2VpZ2h0c193aXRoX2F2ZXJhZ2VzKV0gPC0gXCJBdmVyYWdlXCJcbmNvbG5hbWVzKHdlaWdodHNfd2l0aF9hdmVyYWdlcylbbmNvbCh3ZWlnaHRzX3dpdGhfYXZlcmFnZXMpXSA8LSBcIkF2ZXJhZ2VcIlxud2VpZ2h0c193aXRoX2F2ZXJhZ2VzXG5gYGAifQ== -->
+<pre class="r"><code>weights_with_averages &lt;- rbind(weights_with_averages, avarage_weight_by_month)
+rownames(weights_with_averages)[nrow(weights_with_averages)] &lt;- &quot;Average&quot;
+colnames(weights_with_averages)[ncol(weights_with_averages)] &lt;- &quot;Average&quot;
+weights_with_averages</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogbnVtYmVyIG9mIHJvd3Mgb2YgcmVzdWx0IGlzIG5vdCBhIG11bHRpcGxlIG9mIHZlY3RvciBsZW5ndGggKGFyZyAyKVxuIn0= -->
-<pre><code>Warning: number of rows of result is not a multiple of vector length (arg 2)</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucm93bmFtZXMocGVzb3NfY29uX3Byb21lZGlvcylbbnJvdyhwZXNvc19jb25fcHJvbWVkaW9zKV0gPC0gXCJQcm9tZWRpb1wiXG5jb2xuYW1lcyhwZXNvc19jb25fcHJvbWVkaW9zKVtuY29sKHBlc29zX2Nvbl9wcm9tZWRpb3MpXSA8LSBcIlByb21lZGlvXCJcbnBlc29zX2Nvbl9wcm9tZWRpb3NcbmBgYCJ9 -->
-<pre class="r"><code>rownames(pesos_con_promedios)[nrow(pesos_con_promedios)] &lt;- &quot;Promedio&quot;
-colnames(pesos_con_promedios)[ncol(pesos_con_promedios)] &lt;- &quot;Promedio&quot;
-pesos_con_promedios</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgZW5lcm8gIGZlYnJlcm8gICAgbWFyem8gICAgYWJyaWwgICAgIG1heW8gUHJvbWVkaW9cbkFuYSAgICAgIDE3MS41MDMxIDE2MS44MjIzIDE5OC4yNzMzIDE5NS45OTMwIDE5NS41ODE2IDE4My44MjI0XG5CZXRvICAgICAxOTEuNTMyMiAxODEuMTI0MiAxNzguMTMzNCAxNjkuODQzNSAxODcuNzEyMSAxODMuODIyNFxuQ2FybG9zICAgMTc2LjM1OTEgMTk1LjY5NjggMTg3LjEwMjggMTYxLjY4MjQgMTg1LjYyMDMgMTgzLjgyMjRcbkRpYW5hICAgIDE5NS4zMjA3IDE4Mi4wNTc0IDE4Mi45MDUzIDE3My4xMTY4IDE5OS43NzA4IDE4My44MjI0XG5FbGVuYSAgICAxOTcuNjE4NyAxNzguMjY0NiAxNjQuMTE3MCAxOTguMTgwMSAxODYuMjI4MiAxODMuODIyNFxuUHJvbWVkaW8gMTgzLjgyMjQgICAgICAgTkEgICAgICAgTkEgICAgICAgTkEgICAgICAgTkEgMTgzLjgyMjRcbiJ9 -->
-<pre><code>            enero  febrero    marzo    abril     mayo Promedio
-Ana      171.5031 161.8223 198.2733 195.9930 195.5816 183.8224
-Beto     191.5322 181.1242 178.1334 169.8435 187.7121 183.8224
-Carlos   176.3591 195.6968 187.1028 161.6824 185.6203 183.8224
-Diana    195.3207 182.0574 182.9053 173.1168 199.7708 183.8224
-Elena    197.6187 178.2646 164.1170 198.1801 186.2282 183.8224
-Promedio 183.8224       NA       NA       NA       NA 183.8224</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgSmFudWFyeSBGZWJydWFyeSAgICBNYXJjaCAgICBBcHJpbCAgICAgIE1heSAgQXZlcmFnZVxuQW5hICAgICAxNjUuODI3MyAxNzguMTk0OCAxNjUuODUxMCAxNjcuMjkxOSAxNjMuMTQ0NiAxNjguMDYxOVxuSmhvbiAgICAxODYuMjYxNiAxNzguNzczMyAxNjEuNzEzNyAxNzcuNjU1NCAxOTUuODk2OCAxODAuMDYwMlxuQ2hhcmxpZSAxNzIuNjc5NCAxODkuNTIzMSAxODMuMjU4OSAxNjYuODc4NyAxOTYuMjcyMCAxODEuNzIyNFxuRGlhbmEgICAxNjkuMDA4OSAxNjUuMzkxNCAxODAuNzczNCAxODguMjc1MCAxNjYuMzY1MSAxNzMuOTYyN1xuSGVsZW4gICAxNjMuMzEyOSAxNzguMTExOSAxNjguMjcwNyAxOTUuMjYxNSAxNzUuOTgyNSAxNzYuMTg3OVxuQXZlcmFnZSAxNzEuNDE4MCAxNzcuOTk4OSAxNzEuOTczNSAxNzkuMDcyNSAxNzkuNTMyMiAxNzUuOTk5MFxuIn0= -->
+<pre><code>         January February    March    April      May  Average
+Ana     165.8273 178.1948 165.8510 167.2919 163.1446 168.0619
+Jhon    186.2616 178.7733 161.7137 177.6554 195.8968 180.0602
+Charlie 172.6794 189.5231 183.2589 166.8787 196.2720 181.7224
+Diana   169.0089 165.3914 180.7734 188.2750 166.3651 173.9627
+Helen   163.3129 178.1119 168.2707 195.2615 175.9825 176.1879
+Average 171.4180 177.9989 171.9735 179.0725 179.5322 175.9990</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKUGFydCAxCgpgYGB7cn0KIyBSYW5kb20gd2VpZ2h0IG1hdHJpeCBiZXR3ZWVuIDE2MCBhbmQgMjAwIHBvdW5kcwp3ZWlnaHRzIDwtIG1hdHJpeChydW5pZigyNSwgbWluID0gMTYwLCBtYXggPSAyMDApLCBucm93ID0gNSwgbmNvbCA9IDUpCgojIE1vbnRocyBmcm9tIEphbnVhcnkgdG8gTWF5IGFzIGNvbCBuYW1lcwpjb2xuYW1lcyh3ZWlnaHRzKSA8LSBjKCJKYW51YXJ5IiwgIkZlYnJ1YXJ5IiwgIk1hcmNoIiwgIkFwcmlsIiwgIk1heSIpCgojIDUgbmFtZXMgb2YgcGVvcGxlIGFzIHJvdyBuYW1lcwpyb3duYW1lcyh3ZWlnaHRzKSA8LSBjKCJBbmEiLCAiSmhvbiIsICJDaGFybGllIiwgIkRpYW5hIiwgIkhlbGVuIikKCiMgU2hvdyBzdGFydCBtYXRyaXgKd2VpZ2h0cwoKIyBBdmFyYWdlIHdlaWdodCBieSBwZXJzb24KYXZhcmFnZV93ZWlnaHRfYnlfcGVyc29uIDwtIHJvd01lYW5zKHdlaWdodHMpCmF2YXJhZ2Vfd2VpZ2h0X2J5X3BlcnNvbgoKIyBBdmFyYWdlIHdlaWdodCBieSBtb250aAphdmFyYWdlX3dlaWdodF9ieV9tb250aCA8LSBjb2xNZWFucyh3ZWlnaHRzKQphdmFyYWdlX3dlaWdodF9ieV9tb250aAoKIyBNYXRpeCB3aXRoIGF2ZXJhZ2VzCndlaWdodHNfd2l0aF9hdmVyYWdlcyA8LSBjYmluZCh3ZWlnaHRzLCBhdmFyYWdlX3dlaWdodF9ieV9wZXJzb24pCndlaWdodHNfd2l0aF9hdmVyYWdlcyA8LSByYmluZCh3ZWlnaHRzX3dpdGhfYXZlcmFnZXMsIGF2YXJhZ2Vfd2VpZ2h0X2J5X21vbnRoKQpyb3duYW1lcyh3ZWlnaHRzX3dpdGhfYXZlcmFnZXMpW25yb3cod2VpZ2h0c193aXRoX2F2ZXJhZ2VzKV0gPC0gIkF2ZXJhZ2UiCmNvbG5hbWVzKHdlaWdodHNfd2l0aF9hdmVyYWdlcylbbmNvbCh3ZWlnaHRzX3dpdGhfYXZlcmFnZXMpXSA8LSAiQXZlcmFnZSIKd2VpZ2h0c193aXRoX2F2ZXJhZ2VzCgpgYGAK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKUGFydCAxCgpgYGB7cn0KIyBSYW5kb20gd2VpZ2h0IG1hdHJpeCBiZXR3ZWVuIDE2MCBhbmQgMjAwIHBvdW5kcwp3ZWlnaHRzIDwtIG1hdHJpeChydW5pZigyNSwgbWluID0gMTYwLCBtYXggPSAyMDApLCBucm93ID0gNSwgbmNvbCA9IDUpCgojIE1vbnRocyBmcm9tIEphbnVhcnkgdG8gTWF5IGFzIGNvbCBuYW1lcwpjb2xuYW1lcyh3ZWlnaHRzKSA8LSBjKCJKYW51YXJ5IiwgIkZlYnJ1YXJ5IiwgIk1hcmNoIiwgIkFwcmlsIiwgIk1heSIpCgojIDUgbmFtZXMgb2YgcGVvcGxlIGFzIHJvdyBuYW1lcwpyb3duYW1lcyh3ZWlnaHRzKSA8LSBjKCJBbmEiLCAiSmhvbiIsICJDaGFybGllIiwgIkRpYW5hIiwgIkhlbGVuIikKCiMgU2hvdyBzdGFydCBtYXRyaXgKd2VpZ2h0cwoKIyBBdmVyYWdlIHdlaWdodCBieSBwZXJzb24KYXZhcmFnZV93ZWlnaHRfYnlfcGVyc29uIDwtIHJvd01lYW5zKHdlaWdodHMpCmF2YXJhZ2Vfd2VpZ2h0X2J5X3BlcnNvbgoKIyBNYXRyaXggd2l0aCB3ZWlnaHRzIGF2ZXJhZ2VzCndlaWdodHNfd2l0aF9hdmVyYWdlcyA8LSBjYmluZCh3ZWlnaHRzLCBhdmFyYWdlX3dlaWdodF9ieV9wZXJzb24pCgojIEF2ZXJhZ2Ugd2VpZ2h0IGJ5IG1vbnRoCmF2YXJhZ2Vfd2VpZ2h0X2J5X21vbnRoIDwtIGNvbE1lYW5zKHdlaWdodHNfd2l0aF9hdmVyYWdlcykKYXZhcmFnZV93ZWlnaHRfYnlfbW9udGgKCndlaWdodHNfd2l0aF9hdmVyYWdlcyA8LSByYmluZCh3ZWlnaHRzX3dpdGhfYXZlcmFnZXMsIGF2YXJhZ2Vfd2VpZ2h0X2J5X21vbnRoKQpyb3duYW1lcyh3ZWlnaHRzX3dpdGhfYXZlcmFnZXMpW25yb3cod2VpZ2h0c193aXRoX2F2ZXJhZ2VzKV0gPC0gIkF2ZXJhZ2UiCmNvbG5hbWVzKHdlaWdodHNfd2l0aF9hdmVyYWdlcylbbmNvbCh3ZWlnaHRzX3dpdGhfYXZlcmFnZXMpXSA8LSAiQXZlcmFnZSIKd2VpZ2h0c193aXRoX2F2ZXJhZ2VzCgpgYGAK</div>
 
 
 

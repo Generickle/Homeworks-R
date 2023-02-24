@@ -18,16 +18,17 @@ rownames(weights) <- c("Ana", "Jhon", "Charlie", "Diana", "Helen")
 # Show start matrix
 weights
 
-# Avarage weight by person
+# Average weight by person
 avarage_weight_by_person <- rowMeans(weights)
 avarage_weight_by_person
 
-# Avarage weight by month
-avarage_weight_by_month <- colMeans(weights)
+# Matrix with weights averages
+weights_with_averages <- cbind(weights, avarage_weight_by_person)
+
+# Average weight by month
+avarage_weight_by_month <- colMeans(weights_with_averages)
 avarage_weight_by_month
 
-# Matix with averages
-weights_with_averages <- cbind(weights, avarage_weight_by_person)
 weights_with_averages <- rbind(weights_with_averages, avarage_weight_by_month)
 rownames(weights_with_averages)[nrow(weights_with_averages)] <- "Average"
 colnames(weights_with_averages)[ncol(weights_with_averages)] <- "Average"
