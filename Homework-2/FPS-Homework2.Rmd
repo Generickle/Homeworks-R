@@ -1,0 +1,152 @@
+---
+title: "Funciones en R y la familia apply"
+output: html_notebook
+---
+## Funciones en R
+
+Las funciones son bloques de código que se pueden reutilizar para realizar una tarea específica en un programa.
+En R, las funciones se definen utilizando la palabra reservada "function" seguida del nombre de la función y los argumentos entre paréntesis. 
+
+La estructura básica de una función es la siguiente:
+
+```{r}
+nombre_funcion <- function(argumento1, argumento2, ...) {
+  # cuerpo de la función
+  resultado <- operaciones
+  return(resultado)
+}
+```
+
+- nombre_funcion: el nombre de la función que se está definiendo.
+- argumento1, argumento2, ...: los argumentos de la función que se utilizarán en el cuerpo de la función.
+- resultado: el valor que devuelve la función.
+
+A continuación, se presenta un ejemplo de función que calcula la suma de dos números:
+
+```{r}
+suma <- function(a, b) {
+  resultado <- a + b
+  return(resultado)
+}
+
+suma(6, 9)
+```
+
+Los argumentos de una función pueden ser de diferentes tipos, como números, vectores, matrices, listas, entre otros y estos pueden ser pasados por valor o por referencia.
+
+- Argumentos por valor: cuando se pasan argumentos por valor, se crea una copia del valor original en la memoria, por lo que cualquier modificación realizada en la función no afectará al valor original.
+
+```{r}
+x <- list(y = 1:10)
+
+pass_by_value <- function(x){
+  x$y <- 10:1
+}
+
+pass_by_value(x)
+x$y
+```
+- Argumentos por referencia: en este caso pasa el puntero al objeto original lo que quiere decir que si cambia el argumento también cambia el objeto original debido a que es el mismo.
+
+```{r}
+x <- new.env()
+x$y <- 1:10
+
+pass_by_value <- function(x){
+  x$y <- 10:1
+}
+
+pass_by_value(x)
+x$y
+```
+
+
+## Familia apply
+
+La familia apply de funciones en R permite aplicar una función a un conjunto de datos en una estructura específica, como una matriz, un data frame o una lista.
+
+### lapply
+La función lapply aplica una función a cada elemento de una lista y devuelve una lista con los resultados. La sintaxis básica es la siguiente:
+
+```{r}
+# lapply(X, FUN)
+```
+
+- X: la lista a la que se le aplicará la función.
+- FUN: la función que se aplicará a cada elemento de la lista.
+
+A continuación, se presenta un ejemplo de uso de lapply con una función que calcula el cuadrado de un número:
+
+```{r}
+# crear una lista de números
+numeros <- list(1:5)
+
+# definir una función que calcula el cuadrado de un número
+cuadrado <- function(x) {
+  return(x^2)
+}
+
+# aplicar la función cuadrado a cada elemento de la lista
+resultado <- lapply(numeros, cuadrado)
+```
+### sapply
+
+La función sapply es similar a lapply, pero intenta simplificar el resultado a un vector o matriz si es posible. La sintaxis básica es la siguiente:
+
+```{r}
+# sapply(X, FUN)
+```
+
+- X: la lista a la que se le aplicará la función.
+- FUN: la función que se aplicará a cada elemento de la lista.
+
+A continuación, se presenta un ejemplo de uso de sapply con una función que calcula el cuadrado de un número:
+
+```{r}
+# crear una lista de números
+numeros <- list(1:5)
+
+# definir una función que calcula el cuadrado de un número
+cuadrado <- function(x) {
+  return(x^2)
+}
+
+# aplicar la función cuadrado a cada elemento de la lista
+resultado <- sapply(numeros, cuadrado)
+```
+
+### vapply
+
+La función vapply es similar a sapply, pero permite especificar el tipo de valor de retorno. La sintaxis básica es la siguiente:
+
+```{r}
+# vapply(X, FUN, FUN.VALUE, ..., USE.NAMES = TRUE)
+```
+
+- X: es el vector, lista o matriz a la que se aplicará la función
+- FUN: es la función que se aplicará
+- FUN.VALUE: es un vector o matriz de valores que se utilizarán para especificar el tipo y tamaño del valor de retorno
+- Los argumentos adicionales (...): son argumentos opcionales que se pueden pasar a la función.
+
+En este ejemplo, crearemos una función personalizada que toma un número como argumento y devuelve el doble del número si es par, y un mensaje de error si es impar. Luego, aplicaremos esta función a cada elemento de un vector utilizando la función vapply.
+
+```{r}
+# Crear una función personalizada
+doble_o_error <- function(x) {
+  if (x %% 2 == 0) {
+    return(x * 2)
+  } else {
+    stop("El número es impar")
+  }
+}
+
+# Crear un vector de números
+numeros <- c(2, 4, 8, 16)
+
+# Aplicar la función personalizada a cada elemento del vector
+resultados <- vapply(numeros, doble_o_error, numeric(1), USE.NAMES = FALSE)
+
+# Mostrar los resultados
+resultados
+```
+
