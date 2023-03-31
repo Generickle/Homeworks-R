@@ -1,0 +1,101 @@
+---
+title: "Dataset desde CSV"
+output: html_notebook
+---
+
+## ¿Cómo leer un archivo CSV desde R?
+
+Para leer un archivo CSV desde R puedes utilizar la función read.csv() o read.csv2() dependiendo de la configuración de tu sistema regional. Ambas funciones tienen la misma sintaxis y argumentos.
+
+La sintaxis básica de read.csv() es la siguiente: *datos <- read.csv("ruta/archivo.csv")*
+
+Donde "ruta/archivo.csv" es la ruta del archivo que deseas leer y "datos" es el nombre que le darás al objeto en el que se almacenarán los datos del archivo CSV.
+
+La función read.csv() también tiene muchos argumentos opcionales que te permiten personalizar cómo se leen los datos, por ejemplo, puedes especificar si el archivo tiene encabezados, qué caracteres se usan para separar los campos y cómo tratar los valores faltantes. Para más información sobre la función read.csv() y sus argumentos, puedes ejecutar ?read.csv en la consola de R.
+
+## Función select() de la paquetería de dplyr
+
+La función select() de la paquetería dplyr en R se utiliza para seleccionar un subconjunto de columnas de un dataframe. Permite al usuario seleccionar columnas específicas del dataframe y renombrarlas.
+
+La sintaxis básica es *select(dataframe, columna1, columna2, ...*), donde dataframe es el nombre del dataframe y columna1, columna2, etc. son los nombres de las columnas que se desean seleccionar.
+
+También es posible seleccionar columnas basándose en patrones de nombres. Por ejemplo, si se tienen columnas que comienzan con "A", se puede utilizar el patrón *starts_with("A")* para seleccionar todas esas columnas.
+
+La función select() también permite renombrar las columnas utilizando el operador =. Por ejemplo, *select(dataframe, columna1 = nuevo_nombre1, columna2 = nuevo_nombre2, ...)* renombrará las columnas seleccionadas.
+
+Además, es posible excluir columnas utilizando el signo negativo -. Por ejemplo, *select(dataframe, -columna1, -columna2, ...)* excluye las columnas seleccionadas.
+
+En resumen, select() es una función muy útil para seleccionar columnas específicas y renombrarlas en un dataframe en R.
+
+## Leer el dataset compartido (primary_results.csv) y asignelo a la variable dataset_results
+
+```{r}
+library(dplyr)
+
+# Leer el archivo CSV y asignarlo a una variable
+dataset_results <- read.csv("primary_results.csv")
+
+dataset_results
+```
+## 1. Filtrar todos los votos del estado de Florida
+
+```{r}
+# Filtrar los votos del estado de Florida
+florida_votes <- dataset_results %>%
+  filter(state == "Florida")
+
+florida_votes
+```
+## 2. Utilice operadores lógicos (& and |), según corresponda:
+
+### 2.1 Filtrar votos para los candidatos Hillary Clinton o Donald Trump
+
+```{r}
+clinton_trump_votes <- dataset_results %>%
+  filter(candidate == "Hillary Clinton" | candidate == "Donald Trump")
+
+clinton_trump_votes
+```
+
+### 2.2 Filtrar votos para el partido Demócrata y el condado Shelby
+
+```{r}
+dem_shelby_votes <- dataset_results %>%
+  filter(party == "Democrat" & county == "Shelby")
+
+dem_shelby_votes
+```
+
+### 2.3 Filtrar votos para el estado de Alabama y que la cantidad de votos sea mayor a 15000
+
+```{r}
+alabama_votes <- dataset_results %>%
+  filter(state == "Alabama" & votes > 15000)
+
+alabama_votes
+```
+## 3. Utilice la función select y arrange para el siguiente filtrado:
+
+### 3.1. Filtrar votos para el estado de Texas y el condado Denton, seleccionando únicamente las columnas party, candidate, votes, luego ordene de forma descendente por la columna votes.
+
+```{r}
+texas_denton_votes <- dataset_results %>%
+  filter(state == "Texas" & county == "Denton") %>%
+  select(party, candidate, votes) %>%
+  arrange(desc(votes))
+
+texas_denton_votes
+```
+## 4. Utilice el verbo mutate y arrange para el siguiente filtrado:
+
+### 4.1. Filtrar por el partido Republicano, que el candidato sea Ted Cruz en el estado de Alaska, luego agregue una columna que se llame vote_count que sea la división de votes por fraction_votes (votes/fraction_votes), finalmente ordene de forma descendente por vote_count.
+
+```{r}
+republican_alaska_votes_for_ted_cruz <- dataset_results %>%
+  filter(party == "Republican" & candidate == "Ted Cruz" & state == "Alaska") %>%
+  mutate(vote_count = votes/fraction_votes) %>%
+  arrange(desc(vote_count))
+
+republican_alaska_votes_for_ted_cruz
+```
+
